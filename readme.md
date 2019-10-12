@@ -11,12 +11,37 @@ Accepts an arguments list, just like [`Function.prototype.call()`](https://devel
 Requires [Node.js](https://nodejs.org/) 6.0.0 or above.
 
 ```bash
-npm install trim-call --save
+npm i trim-call
 ```
 
-The module exports a single function.
+## API
 
-## Usage Example
+The module exports a function (`trimCall()`) that has one other function attached to it as a method (`trimCall.new()`).
+
+### `trimCall()`
+
+#### Parameters
+
+1. `fn` (function): The function to call.
+2. `thisArg` (any): The value of `this` while the function is being called.
+3. Variadic: `...args` (one or more of: any): The arguments for the function call. Any `undefined` arguments at the end will be dropped.
+
+#### Return Value
+
+The return value of `fn` when called with `thisArg` and `args`.
+
+### `trimCall.new()`
+
+#### Parameters
+
+1. `Cls` (class): The class whose constructor you want to call.
+2. Variadic: `...args` (one or more of: any): The arguments for the constructor call. Any `undefined` arguments at the end will be dropped.
+
+#### Return Value
+
+A new instance of `Cls` constructed with `args`.
+
+## Examples
 
 ```javascript
 const trimCall = require('trim-call')
@@ -49,3 +74,7 @@ function f2 () {
 ```
 
 Without `trimCall()`, the undefined `b` argument of `f1()` becomes an explicit second argument for `f2()`.
+
+## Related
+
+* [trim-apply](https://github.com/lamansky/trim-apply)
